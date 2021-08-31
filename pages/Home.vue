@@ -1,9 +1,12 @@
 <template>
   <div class="home">
-    <div v-if="projects.length">
+    <div v-if="projects.length && !isLoading">
       <div v-for="(project, key) in projects" :key="key">
         <ProjectCard :project="project" class="mb-3"/>
       </div>
+    </div>
+    <div v-else-if="projects.length && isLoading">
+      loading...
     </div>
     <div v-else>empty</div>
   </div>

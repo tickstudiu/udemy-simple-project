@@ -5,4 +5,7 @@ export default ($axios: any) => ({
     byId({id}: {id: number}) {
         return $axios.$get(`/projects/${id}`)
     },
+    deleteById({ id }: { id: number }) {
+        return $axios.$delete(`/projects/${id}`)
+    },
 })
