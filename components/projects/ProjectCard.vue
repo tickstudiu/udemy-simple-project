@@ -6,7 +6,7 @@
           {{ projectTitle }}
         </h4>
         <div class="icons">
-          <fa icon="check" class="icon" />
+          <fa icon="check" class="icon" :class="{'active': project.complete}" @click="toggleComplete(project.id)"/>
           <fa icon="edit" class="icon" @click="editProjectLink" />
           <fa icon="trash-alt" class="icon" @click="deleteProject(project.id)"/>
         </div>
@@ -53,6 +53,10 @@ export default Vue.extend({
 
     async deleteProject(id: number):Promise<void> {
       await this.$store.dispatch('home/removedProject', {id})
+    },
+
+    async toggleComplete(id: number):Promise<void> {
+      await this.$store.dispatch('home/toggleComplete', {id})
     }
   }
 })
@@ -85,7 +89,7 @@ export default Vue.extend({
           &:not(.active):not(.disabled):hover
             @apply text-gray-700
           &.active
-            @apply text-gray-900
+            @apply text-green-500
           &.disabled
-            @apply text-gray-300
+            @apply text-red-300
 </style>

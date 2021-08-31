@@ -22,6 +22,28 @@ export default {
     },
 
     actions: {
+        async toggleComplete({ commit,state }: { commit: any, state:any }, payload: any) {
+            const { id } = payload
+            const project = state.projects.find((project: ProjectItem) => project.id === id)
+
+            try {
+                commit('GET_PROJECT_REQUEST')
+                const { app }: any = this
+                // toggle complete project
+                await app.$services.project.toggle({ id, project})
+                // get new project list
+                const response: any = await app.$services.project.all()
+
+                commit('UPDATE_PROJECTS', response)
+
+            } catch {
+                commit('GET_PROJECT_FAILURE')
+                // do something
+            } finally {
+                commit('GET_PROJECT_SUCCESS')
+            }
+        },
+
         async removedProject({ commit }: { commit: any }, payload: any) {
             const {id} = payload
 
