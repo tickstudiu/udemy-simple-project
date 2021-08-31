@@ -1,9 +1,9 @@
-import { Project } from '@/types/project'
+import { ProjectItem } from '@/types/project'
 
 export default {
     state: () => ({
         isLoading: false,
-        projects: [] as Array<Project>,
+        projects: [] as Array<ProjectItem>,
     }),
 
     mutations: {
@@ -16,7 +16,7 @@ export default {
         GET_PROJECT_FAILURE(state: any) {
             state.isLoading = false
         },
-        UPDATE_PROJECTS(state: any, newProjects: Array<Project>) {
+        UPDATE_PROJECTS(state: any, newProjects: Array<ProjectItem>) {
             state.projects = newProjects
         },
     },
