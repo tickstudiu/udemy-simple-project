@@ -1,18 +1,23 @@
 <template>
   <div class="home">
-      <div v-if="projects.length">
-          have some
+    <div v-if="projects.length">
+      <div v-for="(project, key) in projects" :key="key">
+        <ProjectCard :project="project"/>
       </div>
-      <div v-else>
-          empty
-      </div>
+    </div>
+    <div v-else>empty</div>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import { mapState } from 'vuex'
+import ProjectCard from '@/components/projects/ProjectCard.vue'
 export default Vue.extend({
+  components: {
+    ProjectCard,
+  },
+
   async fetch() {
     await this.$store.dispatch('home/fetchProjects')
   },
