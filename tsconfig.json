@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ES2018",
+    "target": "ES2019",
     "module": "ESNext",
     "moduleResolution": "Node",
     "lib": [
@@ -25,8 +25,11 @@
     },
     "types": [
       "@nuxt/types",
+      "@types/node",
+      "webpack-env",
       "@nuxtjs/axios",
-      "@types/node"
+      "@types/webpack-env",
+      "cookie-universal-nuxt"
     ]
   },
   "exclude": [

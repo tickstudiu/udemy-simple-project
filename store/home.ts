@@ -27,7 +27,8 @@ export default {
         ) {
             try {
                 commit('GET_PROJECT_REQUEST')
-                const response: any = []
+                const { app }: any = this
+                const response: any = await app.$services.project.all()
 
                 commit('UPDATE_PROJECTS', response)
             } catch {

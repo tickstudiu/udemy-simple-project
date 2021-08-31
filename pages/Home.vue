@@ -3,7 +3,7 @@
       <div v-if="projects.length">
           have some
       </div>
-      <div>
+      <div v-else>
           empty
       </div>
   </div>
