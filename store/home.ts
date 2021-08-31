@@ -1,7 +1,9 @@
+import { Project } from '@/types/project'
+
 export default {
     state: () => ({
         isLoading: false,
-        projects: [] as Array<any>,
+        projects: [] as Array<Project>,
     }),
 
     mutations: {
@@ -14,7 +16,7 @@ export default {
         GET_PROJECT_FAILURE(state: any) {
             state.isLoading = false
         },
-        UPDATE_PROJECTS(state: any, newProjects: Array<any>) {
+        UPDATE_PROJECTS(state: any, newProjects: Array<Project>) {
             state.projects = newProjects
         },
     },
@@ -25,7 +27,7 @@ export default {
         ) {
             try {
                 commit('GET_PROJECT_REQUEST')
-                const response:any = []
+                const response: any = []
 
                 commit('UPDATE_PROJECTS', response)
             } catch {
