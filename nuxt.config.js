@@ -15,6 +15,9 @@ export default {
     API_BASE_URL: process.env.API_BASE_URL,
   },
 
+  // Disable the Progress Bar
+  loading: false,
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'udemy-simple-project',
