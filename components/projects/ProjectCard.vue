@@ -1,14 +1,23 @@
 <template>
-  <div v-if="project" class="project-card" :class="{ active: showDetails }">
+  <div v-if="project" class="project-card" :class="{ complete: project.complete }">
     <div class="body">
       <div class="header">
         <h4 class="title" @click="showDetails = !showDetails">
           {{ projectTitle }}
         </h4>
         <div class="icons">
-          <fa icon="check" class="icon" :class="{'active': project.complete}" @click="toggleComplete(project.id)"/>
+          <fa
+            icon="check"
+            class="icon"
+            :class="{ active: project.complete }"
+            @click="toggleComplete(project.id)"
+          />
           <fa icon="edit" class="icon" @click="editProjectLink" />
-          <fa icon="trash-alt" class="icon" @click="deleteProject(project.id)"/>
+          <fa
+            icon="trash-alt"
+            class="icon"
+            @click="deleteProject(project.id)"
+          />
         </div>
       </div>
       <transition name="fade">
@@ -47,18 +56,18 @@ export default Vue.extend({
   },
 
   methods: {
-    editProjectLink():void {
+    editProjectLink(): void {
       this.$router.push({ path: `/project/${this.project.id}` })
     },
 
-    async deleteProject(id: number):Promise<void> {
-      await this.$store.dispatch('home/removedProject', {id})
+    async deleteProject(id: number): Promise<void> {
+      await this.$store.dispatch('home/removedProject', { id })
     },
 
-    async toggleComplete(id: number):Promise<void> {
-      await this.$store.dispatch('home/toggleComplete', {id})
-    }
-  }
+    async toggleComplete(id: number): Promise<void> {
+      await this.$store.dispatch('home/toggleComplete', { id })
+    },
+  },
 })
 </script>
 <style lang="sass" scoped>
@@ -69,10 +78,10 @@ export default Vue.extend({
   opacity: 0
 
 .project-card
-  @apply border border-gray-500 p-6 transition-all
+  @apply border-2 border-gray-500 p-6 transition-all border-red-500
 
-  &.active
-    @apply border-red-500
+  &.complete
+    @apply border-green-500 
 
   .body
     .header
