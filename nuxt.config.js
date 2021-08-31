@@ -1,4 +1,18 @@
 export default {
+  server: {
+    host: '0.0.0.0',
+    port: 3000,
+  },
+
+  /**
+   * Client-side env
+   */
+  env: {
+    ENVIRONMENT: process.env.ENVIRONMENT,
+    APP_BASE_URL: process.env.APP_BASE_URL,
+    API_BASE_URL: process.env.API_BASE_URL,
+  },
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'udemy-simple-project',
@@ -30,6 +44,8 @@ export default {
     '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
+
+    '@nuxtjs/router',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -41,13 +57,24 @@ export default {
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    baseURL: `${process.env.API_BASE_URL}`,
+  },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
       lang: 'en'
     }
+  },
+  
+  baseUrl: process.env.APP_BASE_URL,
+
+  // https://github.com/nuxt-community/router-module
+  routerModule: {
+    fileName: 'nuxt.router.js',
+    keepDefaultRouter: true,
+    parsePages: false,
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
