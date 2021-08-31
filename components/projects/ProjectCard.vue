@@ -1,7 +1,14 @@
 <template>
-  <div v-if="project" class="project-card" :class="{'active': showDetails}">
-    <div class="body" @click="showDetails = !showDetails">
-      <h4 class="mb-3">{{ projectName }}</h4>
+  <div v-if="project" class="project-card" :class="{ active: showDetails }">
+    <div class="body">
+      <div class="header">
+        <h4 class="title"  @click="showDetails = !showDetails">{{ projectTitle }}</h4>
+        <div class="icons">
+          <fa icon="check" class="icon"/>
+          <fa icon="edit" class="icon"/>
+          <fa icon="trash-alt" class="icon"/>
+        </div>
+      </div>
       <transition name="fade">
         <p v-if="showDetails">{{ projectDetail }}</p>
       </transition>
@@ -28,7 +35,7 @@ export default Vue.extend({
   },
 
   computed: {
-    projectName(): string {
+    projectTitle(): string {
       return this.project?.title ?? ''
     },
     projectDetail(): string {
@@ -51,5 +58,21 @@ export default Vue.extend({
     @apply border-red-500
 
   .body
-    @apply cursor-pointer
+    .header
+      @apply flex justify-between align-baseline
+
+      .title
+        @apply cursor-pointer
+
+      .icons
+        @apply flex justify-start gap-3
+
+        .icon
+          @apply text-gray-500 transition-all
+          &:not(.active):not(.disabled):hover
+            @apply text-gray-700
+          &.active
+            @apply text-gray-900
+          &.disabled 
+            @apply text-gray-300   
 </style>

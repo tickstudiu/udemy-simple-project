@@ -48,7 +48,17 @@ export default {
     '@nuxtjs/tailwindcss',
 
     '@nuxtjs/router',
+
+    //https://www.npmjs.com/package/@nuxtjs/fontawesome
+    '@nuxtjs/fontawesome'
   ],
+
+  fontawesome: {
+    component: 'fa',
+    icons: {
+      solid: true,
+    }
+  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
