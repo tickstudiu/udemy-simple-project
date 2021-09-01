@@ -22,13 +22,17 @@
         />
         <BaseInputErrorMsgs :data="$v.form.details" class="mt-1" />
       </div>
-      <button class="button">Add</button>
+      <button class="button" :disabled="isLoading">
+        <span v-if="isLoading"> loading... </span>
+        <span v-else>add</span>
+      </button>
     </form>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+import { mapState } from 'vuex'
 import { required, maxLength } from 'vuelidate/lib/validators'
 import BaseInputErrorMsgs from '@/components/bases/BaseInputErrorMsgs.vue'
 export default Vue.extend({
@@ -43,18 +47,26 @@ export default Vue.extend({
       form: {
         title: null,
         details: null,
-        complete: true as boolean
+        complete: false as boolean,
       },
     }
   },
 
+  computed: {
+    ...mapState('project', {
+      isLoading: 'isLoading',
+    }),
+  },
+
   methods: {
-    onSubmit(): void {
+    async onSubmit(): Promise<void> {
       // check form
       this.$v.form.$touch()
 
       if (!this.$v.$invalid) {
-        console.log('done')
+        await this.$store.dispatch('project/createProject', {
+          project: this.form,
+        })
       }
     },
   },

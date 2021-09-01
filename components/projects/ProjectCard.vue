@@ -61,11 +61,11 @@ export default Vue.extend({
     },
 
     async deleteProject(id: number): Promise<void> {
-      await this.$store.dispatch('home/removedProject', { id })
+      await this.$store.dispatch('project/removedProject', { id })
     },
 
     async toggleComplete(id: number): Promise<void> {
-      await this.$store.dispatch('home/toggleComplete', { id })
+      await this.$store.dispatch('project/toggleComplete', { id })
     },
   },
 })

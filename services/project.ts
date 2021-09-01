@@ -15,4 +15,7 @@ export default ($axios: any) => ({
             complete: !project.complete
         })
     },
+    create({ project }: { project: ProjectItem }){
+        return $axios.$post(`/projects`, project)
+    }
 })

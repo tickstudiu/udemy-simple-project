@@ -22,6 +22,23 @@ export default {
     },
 
     actions: {
+        async createProject({ commit }: { commit: any }, payload: any) {
+            const { project } = payload
+
+            try {
+                commit('GET_PROJECT_REQUEST')
+                const { app }: any = this
+                // create project
+                await app.$services.project.create({ project })
+
+            } catch {
+                commit('GET_PROJECT_FAILURE')
+                // do something
+            } finally {
+                commit('GET_PROJECT_SUCCESS')
+            }
+        },
+
         async toggleComplete({ commit, state }: { commit: any, state: any }, payload: any) {
             const { id } = payload
             const project = state.projects.find((project: ProjectItem) => project.id === id)
