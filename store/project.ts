@@ -3,6 +3,7 @@ import { ProjectItem } from '@/types/project'
 export default {
     state: () => ({
         isLoading: false,
+        project: {} as ProjectItem,
         projects: [] as Array<ProjectItem>,
     }),
 
@@ -19,9 +20,29 @@ export default {
         UPDATE_PROJECTS(state: any, newProjects: Array<ProjectItem>) {
             state.projects = newProjects
         },
+        UPDATE_PROJECT(state: any, newProject: ProjectItem) {
+            state.project = newProject
+        },
     },
 
     actions: {
+        async updateProject({ commit }: { commit: any }, payload: any){
+            const { id ,project } = payload
+
+            try {
+                commit('GET_PROJECT_REQUEST')
+                const { app }: any = this
+                // update project
+                await app.$services.project.update({ id, project })
+
+            } catch {
+                commit('GET_PROJECT_FAILURE')
+                // do something
+            } finally {
+                commit('GET_PROJECT_SUCCESS')
+            }
+        },
+
         async createProject({ commit }: { commit: any }, payload: any) {
             const { project } = payload
 
@@ -94,6 +115,26 @@ export default {
                 commit('UPDATE_PROJECTS', response)
             } catch {
                 commit('GET_PROJECT_FAILURE')
+                // do something
+            } finally {
+                commit('GET_PROJECT_SUCCESS')
+            }
+        },
+
+        async fetchProject(
+            { commit }: { commit: any }, payload: any
+        ) {
+            const { id } = payload
+
+            try {
+                commit('GET_PROJECT_REQUEST')
+                const { app }: any = this
+                // get project list
+                const response: any = await app.$services.project.byId({ id })
+
+                commit('UPDATE_PROJECT', response)
+            } catch {
+                commit('GET_PROJECT_FAILURE')                
                 // do something
             } finally {
                 commit('GET_PROJECT_SUCCESS')

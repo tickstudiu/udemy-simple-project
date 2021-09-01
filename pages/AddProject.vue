@@ -67,6 +67,8 @@ export default Vue.extend({
         await this.$store.dispatch('project/createProject', {
           project: this.form,
         })
+
+        this.$router.push({name: 'Home'})
       }
     },
   },

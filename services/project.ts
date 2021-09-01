@@ -17,5 +17,8 @@ export default ($axios: any) => ({
     },
     create({ project }: { project: ProjectItem }){
         return $axios.$post(`/projects`, project)
-    }
+    },
+    update({ id, project }: { id: number, project: ProjectItem }) {
+        return $axios.$patch(`/projects/${id}`, project)
+    },
 })
