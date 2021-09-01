@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <ProjectFilter :projects="projects" :isLoading="isLoading">
+    <ProjectFilter :projects="projects" :isLoading="isLoading" :isError="isError">
       <template #loaded="{ filterProjects }">
         <div v-for="(project, key) in filterProjects" :key="key">
           <ProjectCard :project="project" class="mb-3" />
@@ -30,6 +30,7 @@ export default Vue.extend({
   computed: {
     ...mapState('project', {
       projects: 'projects',
+      isError: 'isError',
       isLoading: 'isLoading',
     }),
   },

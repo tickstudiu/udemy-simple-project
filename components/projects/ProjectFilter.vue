@@ -23,10 +23,11 @@
         ongoing
       </li>
     </ul>
-    <div v-if="projects.length && !isLoading">
+    <div v-if="projects.length && !isLoading && !isError">
       <slot name="loaded" :filterProjects="filterProjects"> </slot>
     </div>
-    <div v-else-if="projects.length && isLoading">loading...</div>
+    <div v-else-if="!projects.length && isLoading && !isError">loading...</div>
+    <div v-else-if="!projects.length && !isLoading && isError">error</div>
     <div v-else>empty</div>
   </div>
 </template>
@@ -43,6 +44,10 @@ export default Vue.extend({
       default: () => [],
     } as PropOptions<Array<ProjectItem>>,
     isLoading: {
+      type: Boolean,
+      default: false,
+    } as PropOptions<boolean>,
+    isError: {
       type: Boolean,
       default: false,
     } as PropOptions<boolean>,
