@@ -56,6 +56,8 @@ export default Vue.extend({
     await this.$store.dispatch('project/fetchProject', {
       id: Number(this.$route.params.id),
     })
+
+    // clone data form store
     this.form = {
         ...this.project 
     }
