@@ -22,8 +22,9 @@
         />
         <BaseInputErrorMsgs :data="$v.form.details" class="mt-1" />
       </div>
-      <button class="button" :disabled="isLoading">
-        <span v-if="isLoading"> loading... </span>
+      <button class="button" :class="{disabled:isError}" :disabled="isLoading || isError">
+        <span v-if="isLoading && !isError"> loading... </span>
+        <span v-if="!isLoading && isError"> error </span>
         <span v-else>add</span>
       </button>
     </form>
@@ -67,6 +68,7 @@ export default Vue.extend({
     ...mapState('project', {
       project: 'project',
       isLoading: 'isLoading',
+      isError: 'isError',
     }),
   },
 
@@ -109,7 +111,10 @@ export default Vue.extend({
     .button
       @apply text-indigo-50 font-bold bg-indigo-600 py-2 px-4 rounded transition-all
 
-      &:hover
+      &.disabled
+        @apply cursor-not-allowed bg-gray-600 text-gray-50
+
+      &:not(.disabled):hover
         @apply bg-indigo-500
 
     .input-group

@@ -3,6 +3,7 @@ import { ProjectItem } from '@/types/project'
 export default {
     state: () => ({
         isLoading: false,
+        isError: false,
         project: {} as ProjectItem,
         projects: [] as Array<ProjectItem>,
     }),
@@ -10,12 +11,14 @@ export default {
     mutations: {
         GET_PROJECT_REQUEST(state: any) {
             state.isLoading = true
+            state.isError = false
         },
         GET_PROJECT_SUCCESS(state: any) {
             state.isLoading = false
         },
         GET_PROJECT_FAILURE(state: any) {
             state.isLoading = false
+            state.isError = true
         },
         UPDATE_PROJECTS(state: any, newProjects: Array<ProjectItem>) {
             state.projects = newProjects
