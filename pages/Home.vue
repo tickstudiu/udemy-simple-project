@@ -17,16 +17,18 @@ import Vue from 'vue'
 import { mapState } from 'vuex'
 import ProjectCard from '@/components/projects/ProjectCard.vue'
 export default Vue.extend({
+  name: 'Home',
+  
   components: {
     ProjectCard,
   },
 
   async fetch() {
-    await this.$store.dispatch('home/fetchProjects')
+    await this.$store.dispatch('project/fetchProjects')
   },
 
   computed: {
-    ...mapState('home', {
+    ...mapState('project', {
       projects: 'projects',
       isLoading: 'isLoading',
     }),

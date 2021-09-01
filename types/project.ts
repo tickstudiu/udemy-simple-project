@@ -1,5 +1,5 @@
 export interface ProjectItem {
-    id: number
+    id?: number
     title: string
     details: string
     complete: boolean

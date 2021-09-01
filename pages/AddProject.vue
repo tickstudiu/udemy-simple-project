@@ -1,6 +1,6 @@
 <template>
   <div class="add-project">
-    <form class="form">
+    <form class="form" @submit.prevent="onSubmit">
       <div class="input-group">
         <label class="label" for="title">Title</label>
         <input
@@ -32,6 +32,8 @@ import Vue from 'vue'
 import { required, maxLength } from 'vuelidate/lib/validators'
 import BaseInputErrorMsgs from '@/components/bases/BaseInputErrorMsgs.vue'
 export default Vue.extend({
+  name: 'Add',
+
   components: {
     BaseInputErrorMsgs,
   },
@@ -41,8 +43,20 @@ export default Vue.extend({
       form: {
         title: null,
         details: null,
+        complete: true as boolean
       },
     }
+  },
+
+  methods: {
+    onSubmit(): void {
+      // check form
+      this.$v.form.$touch()
+
+      if (!this.$v.$invalid) {
+        console.log('done')
+      }
+    },
   },
 
   validations(): any {
@@ -58,10 +72,6 @@ export default Vue.extend({
         },
       },
     }
-  },
-
-  mounted() {
-    this.$v.form.$touch()
   },
 })
 </script>

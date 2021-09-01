@@ -22,7 +22,7 @@ export default {
     },
 
     actions: {
-        async toggleComplete({ commit,state }: { commit: any, state:any }, payload: any) {
+        async toggleComplete({ commit, state }: { commit: any, state: any }, payload: any) {
             const { id } = payload
             const project = state.projects.find((project: ProjectItem) => project.id === id)
 
@@ -30,7 +30,7 @@ export default {
                 commit('GET_PROJECT_REQUEST')
                 const { app }: any = this
                 // toggle complete project
-                await app.$services.project.toggle({ id, project})
+                await app.$services.project.toggle({ id, project })
                 // get new project list
                 const response: any = await app.$services.project.all()
 
@@ -45,13 +45,13 @@ export default {
         },
 
         async removedProject({ commit }: { commit: any }, payload: any) {
-            const {id} = payload
+            const { id } = payload
 
             try {
                 commit('GET_PROJECT_REQUEST')
                 const { app }: any = this
                 // delete project
-                await app.$services.project.deleteById({id})
+                await app.$services.project.deleteById({ id })
                 // get new project list
                 const response: any = await app.$services.project.all()
 

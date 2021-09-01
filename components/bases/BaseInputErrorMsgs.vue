@@ -10,7 +10,6 @@
 </template>
 
 <script lang="ts">
-import { log } from 'console'
 import Vue, { PropOptions } from 'vue'
 import validation from '~/helpers/validation'
 
